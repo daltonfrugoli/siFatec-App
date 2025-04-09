@@ -9,136 +9,228 @@ import {
     Switch,
     TouchableOpacity,
     StatusBar,
-    ScrollView
+    ScrollView,
+    Linking,
+    TextInput
 } from 'react-native';
 
 // Styles
-import { Styles } from "./Login,style";
+import { styles } from "./Login.style";
 
-import { TextInput } from "react-native-paper";
+// Components
+import { CustomModal } from "../../compenents/CustomModal"; 
+
+// Plugins
 import Ionicons from "react-native-vector-icons/Ionicons";
+import SwitchToggle from "react-native-switch-toggle";
 
 export function Login({navigation, route}){
 
-    const [emailInput, setEmailInput] = useState("");
-    const [passwordInput, setPasswordInput] = useState("");
-    const [hidePassword, setHidePassword] = useState(true);
+    // Modal
+    const [modalIsVisible, setModalIsVisible] = useState(false);
 
+    // Email input
+    const [emailInput, setEmailInput] = useState("");
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
+
+    // Password input
+    const [passwordInput, setPasswordInput] = useState("");
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+    const [hidePassword, setHidePassword] = useState(true);
     const passwordRef = useRef();
 
+    // Remember me input 
     const [rememberMe, setRememberMe] = useState(false);
 
     const loginImage = require('../../assets/loginImage.jpg');
     const cpsLogo = require('../../assets/cpsIcon.png');
 
-    function submitCredentials(email, password){
-        console.log('submit credencials');
+    function submitCredentials(email, password, rememberMe){
         console.log('Email: ', email);
         console.log('Password: ', password);
+        navigation.navigate('Home', { email: email, password: password, rememberMe: rememberMe })
     }
 
+    const ModalInstructionTile = (props) => {
+
+        return(
+            <View style = {{ flexDirection :'row', alignItems: 'center', marginVertical: 8 }}>
+                <Text style = {{ color: '#6B6B6B', fontSize: 20, fontWeight: 'bold' }}>{ props.number }</Text>
+                <View style = {{ marginLeft: 8, paddingHorizontal: 8, paddingVertical: 5, borderColor: '#000000', borderLeftWidth: 1 }}>
+                    <Text style = {{  flexShrink: 1, color: '#000000' }}>
+                        { props.instructionLabel }
+                    </Text>
+                </View>
+            </View>
+        )
+    }
+
+    const handleEmailPress = () => {
+        const email = 'daltonfrugoli7@gmail.com';
+        const subject = 'Teste';
+        const body = 'Olá, estou com um problema e gostaria de ajuda.';
+        const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        Linking.openURL(mailtoUrl).catch(err => console.error('Erro ao abrir e-mail:', err));
+    };
+
     return(
-        <SafeAreaView style = {{ backgroundColor: 'red', flex: 1 }}>
+        <SafeAreaView style = {{ flex: 1 }}>
             <StatusBar translucent backgroundColor="transparent" />
             <ImageBackground
                 source = { loginImage } // Caminho da imagem
-                style = { Styles.background }
+                style = { styles.background }
                 resizeMode = "cover"
             >
+                <View style={{ width:'100%', flex: 1 }}>
                 <View
-                    style = { Styles.logotipoContainer }
+                    style = { styles.headerContainer }
                 >
                     
                     <View
-                        style = {{flex: 1, borderColor: '#FFFFFF', borderRightWidth: 2, justifyContent: 'center', alignItems: 'center'}}
+                        style = {{flex: 1, borderColor: '#FFFFFF', borderRightWidth: 2, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}
                     >
-                        <Image source = { cpsLogo } style = { Styles.cpsLogotipo }/>
+                        <Image source = { cpsLogo } style = { styles.cpsLogotipo }/>
                     </View>
                     <View 
-                        style = { Styles.cpsLabelContainer }
+                        style = { styles.cpsLabelContainer }
                     >
                         <Text
-                            style = { Styles.cpsLabel }
+                            style = { styles.cpsLabel }
                         >
                             Centro{'\n'}
                             Paula Souza
                         </Text>
                     </View>
                 </View>
-                <View style = { Styles.loginFormContainer }>
-                <ScrollView>
-                    <Text style = { Styles.loginTitle }>Login</Text>
-                    <TextInput
-                        activeUnderlineColor="#690000"
-                        style = { Styles.textInput }
-                        label = { "Email" }
-                        value = { emailInput }
-                        onChangeText = { text => setEmailInput(text) }
-                        returnKeyType="next"
-                        onSubmitEditing = { () => passwordRef.current.focus() }
-                        blurOnSubmit = { false }
-                    />
-                    <View
-                        style = { Styles.passwordContainer }
+                <View style = { styles.loginFormContainer }>
+                    <ScrollView
+                        showsVerticalScrollIndicator = { false }
                     >
+                        <Text style = { styles.titleLabel }>Login</Text>
+                        <Text style = { styles.textInputLabel }>Email</Text>
                         <TextInput
-                            ref = { passwordRef }
-                            secureTextEntry = { hidePassword }
-                            activeUnderlineColor="#690000"
-                            style = { Styles.textInput }
-                            contentStyle = {{ paddingRight: 70 }}
-                            label = { "Senha" }
-                            value = { passwordInput }
-                            onChangeText = { text => setPasswordInput(text) }
-                            onSubmitEditing = { () => submitCredentials(emailInput, passwordInput) }
+                            style={[ styles.textInput, isEmailFocused && { borderBottomColor: '#B70E0E' }]}
+                            placeholder="usuario2025@email.com"
+                            onFocus = { () => setIsEmailFocused(true) }
+                            onBlur = { () => setIsEmailFocused(false) }
+                            value={emailInput}
+                            onChangeText={setEmailInput}
+                            returnKeyType="next"
+                            onSubmitEditing = { () => passwordRef.current.focus() } 
                         />
-                        <TouchableOpacity
-                            onPress = { () => {
-                                setHidePassword( prev => !prev );
-                            }}
-                            style = { Styles.hidePassButtonContainer }
+                        <View
+                            style = { styles.passwordContainer }
                         >
-                            <Text>O</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style = { Styles.rememberMeContainer }
-                    >
-                        <Switch
-                            trackColor = {{ false: '#A49C9C', true: '#B70E0E' }}
-                            thumbColor = { rememberMe ? '#F4F3F4' : '#F4F3F4' }
-                            onValueChange = { () => setRememberMe( prev => !prev ) }
-                            value = { rememberMe }
-                        />
-                        <Text>Lembrar de mim</Text>
-                    </View>
-                    <TouchableOpacity
-                        style = { Styles.submitButton }
-                        onPress = { () => {
-                            submitCredentials(emailInput, passwordInput);
-                        }}
-                    >
-                        <Text
-                            style = { Styles.submitButtonLabel }
-                        >Entrar</Text>
-                    </TouchableOpacity>
-                    <View
-                        style = { Styles.solutionsContainer }
-                    >
+                            <View>
+                                <Text style = { styles.textInputLabel }>Senha</Text> 
+                                <TextInput
+                                    style={[ styles.textInput, { paddingRight: 70 }, isPasswordFocused && { borderBottomColor: '#B70E0E' }]}
+                                    placeholder="***********"
+                                    ref = { passwordRef }
+                                    onFocus = { () => setIsPasswordFocused(true) }
+                                    onBlur = { () => setIsPasswordFocused(false) }
+                                    secureTextEntry = { hidePassword }
+                                    label = { "Senha" }
+                                    value = { passwordInput }
+                                    onChangeText = { setPasswordInput }
+                                    returnKeyType = "done"
+                                    onSubmitEditing = { () => submitCredentials(emailInput, passwordInput, rememberMe) }
+                                />
+                            </View>
+                            <TouchableOpacity
+                                onPress = { () => {
+                                    setHidePassword( prev => !prev );
+                                }}
+                                style = { styles.hidePassButtonContainer }
+                            >
+                                <Ionicons name = { hidePassword? "eye" : "eye-off" } style = { styles.hidePassButton }/>
+                            </TouchableOpacity>
+                        </View>
+                        <View
+                            style = { styles.rememberMeContainer }
+                        >
+                            <SwitchToggle 
+                                switchOn = { rememberMe } 
+                                onPress = { () => setRememberMe(!rememberMe) }
+                                backgroundColorOn='#B70E0E'
+                                backgroundColorOff='#747474'
+                                circleColorOff='#FFFFFF'
+                                circleColorOn='#FFFFFF'
+                                containerStyle={{
+                                    width: 34,
+                                    height: 18,
+                                    borderRadius: 25,
+                                    padding: 4,
+                                }}
+                                circleStyle={{
+                                    width: 11,
+                                    height: 11,
+                                    borderRadius: 20,
+                                }}
+                            />
+                            <Text style = {{ marginLeft: 10, color: '#747474' }}>Lembrar de mim</Text>
+                        </View>
                         <TouchableOpacity
+                            style = { styles.submitButton }
                             onPress = { () => {
-                                console.log("soluções");
+                                submitCredentials(emailInput, passwordInput, rememberMe);
                             }}
                         >
                             <Text
-                                style = { Styles.solutionsButtonLabel }
-                            >soluções </Text>
+                                style = { styles.submitButtonLabel }
+                            >Entrar</Text>
                         </TouchableOpacity>
-                        <Text>para problemas de acesso</Text>
-                    </View>
+                        <View
+                            style = { styles.solutionsContainer }
+                        >
+                            <TouchableOpacity
+                                onPress = { () => {
+                                    console.log("soluções");
+                                    setModalIsVisible(true);
+                                }}
+                            >
+                                <Text
+                                    style = { styles.solutionsButtonLabel }
+                                >soluções </Text>
+                            </TouchableOpacity>
+                            <Text style = {{ color: '#747474' }}>para problemas de acesso</Text>
+                        </View>
                     </ScrollView>
                 </View>
-            </ImageBackground>  
+                </View>
+            </ImageBackground> 
+            <CustomModal isVisible = { modalIsVisible } closeModal = { () => setModalIsVisible(false) }>
+                <View style = { styles.solutionsModalContainer }>
+                    <View style = { styles.solutionsModalContentContainer }>
+                        <View style = {{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 15 }}>
+                            <Text style = { styles.modalTitleLabel }>Não consegue fazer login?</Text>
+                            <TouchableOpacity
+                                onPress = { () => setModalIsVisible(false) }
+                            >
+                                <Ionicons style = {{ color: '#747474', marginLeft: 8, fontSize: 22 }} name="close-circle-outline"/>
+                            </TouchableOpacity>
+                        </View>
+                        <ModalInstructionTile instructionLabel = { 'Verifique sua conexão.' } number = { '1' }/>
+                        <ModalInstructionTile instructionLabel = { 'Verifique suas credenciais (email e senha). ' } number = { '2' }/>
+                        <View style = {{ flexDirection :'row', alignItems: 'center', marginVertical: 8 }}>
+                            <Text style = {{ color: '#6B6B6B', fontSize: 20, fontWeight: 'bold' }}>3</Text>
+                            <View style = {{ marginLeft: 8, paddingHorizontal: 8, paddingVertical: 5, borderColor: '#000000', borderLeftWidth: 1 }}>
+                                <Text style={{ color: '#000000' }}>
+                                    Se o problema persistir,{' '}
+                                    <Text
+                                        onPress={handleEmailPress}
+                                        style={{ color: '#000000', fontWeight: '600' }}
+                                    >
+                                        clique aqui
+                                    </Text>{' '}
+                                    para em contato com a coordenação da sua unidade.
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </CustomModal> 
         </SafeAreaView>
     )
 }
