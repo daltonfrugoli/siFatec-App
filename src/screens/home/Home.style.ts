@@ -4,7 +4,7 @@ export const Styles = StyleSheet.create({
     screenContainer: {
         flex: 1, 
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
     title: {
         fontWeight: 'bold',
