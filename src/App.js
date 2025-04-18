@@ -21,6 +21,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Login } from './screens/login/Login';
 import { Home } from './screens/home/Home';
+import { Absences } from './screens/absences/Absences';
+import { Scores } from './screens/scores/Scores';
+import { History } from './screens/history/History';
+import { Schedule } from './screens/schedule/Schedule';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +35,10 @@ function App(){
       <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false, headerLeft: null, animation: "slide_from_right" }}>
         <Stack.Screen name='Login' component={ Login }/>
         <Stack.Screen name='Home' component={ Home }/>
+        <Stack.Screen name='Absences' component={ Absences }/>
+        <Stack.Screen name='Scores' component={ Scores }/>
+        <Stack.Screen name='History' component={ History }/>
+        <Stack.Screen name='Schedule' component={ Schedule }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

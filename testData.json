@@ -1,0 +1,83 @@
+{
+    "absences" : [
+        {
+            "id": 1,
+            "subjectName": "Banco de dados",
+            "absences": 8,
+            "presences": 16
+        },
+        {
+            "id": 2,
+            "subjectName": "Engenharia de software",
+            "absences": 2,
+            "presences": 18
+        },
+        {
+            "id": 3,
+            "subjectName": "Redes",
+            "absences": 0,
+            "presences": 22
+        },
+        {
+            "id": 4,
+            "subjectName": "Programação linear",
+            "absences": 4,
+            "presences": 18
+        },
+        {
+            "id": 5,
+            "subjectName": "Lógica de programação",
+            "absences": 6,
+            "presences": 20
+        }
+    ],
+    "scores": [
+        {
+            "id": 1,
+            "subjectName": "Banco de dados",
+            "evaluations": [
+                {
+                    "id": 1,
+                    "name": "B1",
+                    "score": 8,
+                    "weight": "20%",
+                    "date": "10/03/25"
+                },
+                {
+                    "id": 2,
+                    "name": "B2",
+                    "score": 10,
+                    "weight": "60%",
+                    "date": "14/05/25"
+                },
+                {
+                    "id": 3,
+                    "name": "T1",
+                    "score": 7.5,
+                    "weight": "20%",
+                    "date": "02/06/25"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "subjectName": "Programação mobile",
+            "evaluations": [
+                {
+                    "id": 1,
+                    "name": "B1",
+                    "score": 8,
+                    "weight": "50%",
+                    "date": "07/03/25"
+                },
+                {
+                    "id": 2,
+                    "name": "B2",
+                    "score": 9.25,
+                    "weight": "50%",
+                    "date": "18/05/25"
+                }
+            ]
+        }
+    ]
+}

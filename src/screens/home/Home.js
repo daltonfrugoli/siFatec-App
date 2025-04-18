@@ -31,10 +31,10 @@ export function Home({navigation, route}){
     const backgroundImage = require('../../assets/homeImage.png');
 
     const MENU_OPTIONS = [
-        { label: 'Faltas', icon: "calendar-outline" },
-        { label: 'Notas', icon: "reader-outline"},
-        { label: 'Historico', icon: "file-tray-full-outline"},
-        { label: 'Agenda', icon: "time-outline" },
+        { label: 'Faltas', icon: 'calendar-outline', screen: 'Absences' },
+        { label: 'Notas', icon: 'reader-outline', screen: 'Scores' },
+        { label: 'Historico', icon: 'file-tray-full-outline', screen: 'History' },
+        { label: 'Agenda', icon: 'time-outline', screen: 'Schedule' },
     ];
 
     const ModuleButton = (props) => {
@@ -50,7 +50,7 @@ export function Home({navigation, route}){
                     padding: 10
                 }}
                 onPress = {() => {
-                    console.log(props.label)
+                    navigation.navigate(props.screen);
                 }}
             >
                 <View style = {{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
@@ -224,7 +224,7 @@ export function Home({navigation, route}){
                             rowGap: 10
                         }}>
                             {MENU_OPTIONS.map((item, index) => (
-                                <ModuleButton key = { index } icon = { item.icon } label = { item.label } />
+                                <ModuleButton key = { index } icon = { item.icon } label = { item.label } screen = { item.screen } />
                             ))}
                         </View>
                     </View>
