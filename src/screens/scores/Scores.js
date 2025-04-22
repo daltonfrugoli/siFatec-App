@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { View, FlatList, Text, StatusBar } from "react-native";
+import { View, FlatList, Text, StatusBar, ScrollView } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Styles
@@ -73,14 +73,15 @@ export function Scores({ navigation, route }){
         <SafeAreaView style = {{ flex: 1, backgroundColor: '#FFFFFF' }}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
             <Header label = { 'Notas' }/>
-            <View style = {{ flex: 1 }}>
+            <ScrollView style = {{ flex: 1 }}>
                 <FlatList
                     data = { testData.scores }
                     renderItem = { ScoresTile }
                     keyExtractor = { item => item.id }
                     numColumns = { 1 }
+                    scrollEnabled = { false }
                 />
-            </View>
+            </ScrollView>
             <Footer/>
         </SafeAreaView>
     )
