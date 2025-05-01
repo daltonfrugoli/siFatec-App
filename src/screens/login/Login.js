@@ -6,7 +6,6 @@ import {
     Text,
     ImageBackground,
     Image,
-    Switch,
     TouchableOpacity,
     StatusBar,
     ScrollView,
@@ -24,7 +23,7 @@ import { CustomModal } from "../../compenents/CustomModal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SwitchToggle from "react-native-switch-toggle";
 
-export function Login({navigation, route}){
+export function Login({ navigation, route }){
 
     // Modal
     const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -42,6 +41,7 @@ export function Login({navigation, route}){
     // Remember me input 
     const [rememberMe, setRememberMe] = useState(false);
 
+    // Top image
     const loginImage = require('../../assets/loginImage.jpg');
     const cpsLogo = require('../../assets/cpsIcon.png');
 
@@ -54,10 +54,10 @@ export function Login({navigation, route}){
     const ModalInstructionTile = (props) => {
 
         return(
-            <View style = {{ flexDirection :'row', alignItems: 'center', marginVertical: 8 }}>
-                <Text style = {{ color: '#6B6B6B', fontSize: 20, fontWeight: 'bold' }}>{ props.number }</Text>
-                <View style = {{ marginLeft: 8, paddingHorizontal: 8, paddingVertical: 5, borderColor: '#000000', borderLeftWidth: 1 }}>
-                    <Text style = {{  flexShrink: 1, color: '#000000' }}>
+            <View style = { styles.modalInstructionContainer }>
+                <Text style = { styles.modalInstructionNumber }>{ props.number }</Text>
+                <View style = { styles.modalInstructionBox }>
+                    <Text style = {{ color: '#000000' }}>
                         { props.instructionLabel }
                     </Text>
                 </View>
@@ -69,64 +69,51 @@ export function Login({navigation, route}){
         const email = 'daltonfrugoli7@gmail.com';
         const subject = 'Teste';
         const body = 'Olá, estou com um problema e gostaria de ajuda.';
-        const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoUrl = `mailto:${ email }?subject=${ encodeURIComponent(subject) }&body=${ encodeURIComponent(body) }`;
         
-        Linking.openURL(mailtoUrl).catch(err => console.error('Erro ao abrir e-mail:', err));
+        Linking.openURL(mailtoUrl).catch( err => console.error('Erro ao abrir e-mail:', err));
     };
 
     return(
         <SafeAreaView style = {{ flex: 1 }}>
-            <StatusBar translucent backgroundColor="transparent" />
+            <StatusBar translucent backgroundColor = "transparent"/>
             <ImageBackground
-                source = { loginImage } // Caminho da imagem
+                source = { loginImage } 
                 style = { styles.background }
                 resizeMode = "cover"
             >
-                <View style={{ width:'100%', flex: 1 }}>
-                <View
-                    style = { styles.headerContainer }
-                >
-                    
-                    <View
-                        style = {{flex: 1, borderColor: '#FFFFFF', borderRightWidth: 2, justifyContent: 'center', alignItems: 'center', marginTop: 40 }}
-                    >
-                        <Image source = { cpsLogo } style = { styles.cpsLogotipo }/>
+                <View style = {{ width:'100%', flex: 1 }}>
+                    <View style = { styles.headerContainer }>
+                        <View style = { styles.cpsLogotipoContainer }>
+                            <Image source = { cpsLogo } style = { styles.cpsLogotipo }/>
+                        </View>
+                        <View style = { styles.cpsLabelContainer }>
+                            <Text style = { styles.cpsLabel }>
+                                Centro{'\n'}
+                                Paula Souza
+                            </Text>
+                        </View>
                     </View>
-                    <View 
-                        style = { styles.cpsLabelContainer }
-                    >
-                        <Text
-                            style = { styles.cpsLabel }
-                        >
-                            Centro{'\n'}
-                            Paula Souza
-                        </Text>
-                    </View>
-                </View>
                 <View style = { styles.loginFormContainer }>
-                    <ScrollView
-                        showsVerticalScrollIndicator = { false }
-                    >
+                    <ScrollView showsVerticalScrollIndicator = { false }>
                         <Text style = { styles.titleLabel }>Login</Text>
                         <Text style = { styles.textInputLabel }>Email</Text>
                         <TextInput
-                            style={[ styles.textInput, isEmailFocused && { borderBottomColor: '#B70E0E' }]}
-                            placeholder="usuario2025@email.com"
+                            style = {[ styles.textInput, isEmailFocused && { borderBottomColor: '#B70E0E' }]}
+                            placeholder = "usuario2025@email.com"
                             onFocus = { () => setIsEmailFocused(true) }
                             onBlur = { () => setIsEmailFocused(false) }
-                            value={emailInput}
-                            onChangeText={setEmailInput}
-                            returnKeyType="next"
+                            value = { emailInput }
+                            onChangeText = { setEmailInput }
+                            returnKeyType = "next"
                             onSubmitEditing = { () => passwordRef.current.focus() } 
                         />
-                        <View
-                            style = { styles.passwordContainer }
-                        >
+                        <View style = { styles.passwordContainer }>
                             <View>
                                 <Text style = { styles.textInputLabel }>Senha</Text> 
                                 <TextInput
-                                    style={[ styles.textInput, { paddingRight: 70 }, isPasswordFocused && { borderBottomColor: '#B70E0E' }]}
-                                    placeholder="***********"
+                                    style = {[ styles.textInput, { paddingRight: 70 }, isPasswordFocused && { borderBottomColor: '#B70E0E' }]}
+                                    placeholder = "***********"
                                     ref = { passwordRef }
                                     onFocus = { () => setIsPasswordFocused(true) }
                                     onBlur = { () => setIsPasswordFocused(false) }
@@ -139,25 +126,21 @@ export function Login({navigation, route}){
                                 />
                             </View>
                             <TouchableOpacity
-                                onPress = { () => {
-                                    setHidePassword( prev => !prev );
-                                }}
+                                onPress = { () => setHidePassword(prev => !prev) }
                                 style = { styles.hidePassButtonContainer }
                             >
-                                <Ionicons name = { hidePassword? "eye" : "eye-off" } style = { styles.hidePassButton }/>
+                                <Ionicons name = { hidePassword ? "eye" : "eye-off" } style = { styles.hidePassButton }/>
                             </TouchableOpacity>
                         </View>
-                        <View
-                            style = { styles.rememberMeContainer }
-                        >
+                        <View style = { styles.rememberMeContainer }>
                             <SwitchToggle 
                                 switchOn = { rememberMe } 
                                 onPress = { () => setRememberMe(!rememberMe) }
-                                backgroundColorOn='#B70E0E'
-                                backgroundColorOff='#747474'
-                                circleColorOff='#FFFFFF'
-                                circleColorOn='#FFFFFF'
-                                containerStyle={{
+                                backgroundColorOn = '#B70E0E'
+                                backgroundColorOff = '#747474'
+                                circleColorOff = '#FFFFFF'
+                                circleColorOn = '#FFFFFF'
+                                containerStyle = {{
                                     width: 34,
                                     height: 18,
                                     borderRadius: 25,
@@ -177,22 +160,16 @@ export function Login({navigation, route}){
                                 submitCredentials(emailInput, passwordInput, rememberMe);
                             }}
                         >
-                            <Text
-                                style = { styles.submitButtonLabel }
-                            >Entrar</Text>
+                            <Text style = { styles.submitButtonLabel }>Entrar</Text>
                         </TouchableOpacity>
-                        <View
-                            style = { styles.solutionsContainer }
-                        >
+                        <View style = { styles.solutionsContainer }>
                             <TouchableOpacity
                                 onPress = { () => {
                                     console.log("soluções");
                                     setModalIsVisible(true);
                                 }}
                             >
-                                <Text
-                                    style = { styles.solutionsButtonLabel }
-                                >soluções </Text>
+                                <Text style = { styles.solutionsButtonLabel }>soluções </Text>
                             </TouchableOpacity>
                             <Text style = {{ color: '#747474' }}>para problemas de acesso</Text>
                         </View>
@@ -216,11 +193,11 @@ export function Login({navigation, route}){
                         <View style = {{ flexDirection :'row', alignItems: 'center', marginVertical: 8 }}>
                             <Text style = {{ color: '#6B6B6B', fontSize: 20, fontWeight: 'bold' }}>3</Text>
                             <View style = {{ marginLeft: 8, paddingHorizontal: 8, paddingVertical: 5, borderColor: '#000000', borderLeftWidth: 1 }}>
-                                <Text style={{ color: '#000000' }}>
+                                <Text style = {{ color: '#000000' }}>
                                     Se o problema persistir,{' '}
                                     <Text
-                                        onPress={handleEmailPress}
-                                        style={{ color: '#000000', fontWeight: '600' }}
+                                        onPress = {handleEmailPress}
+                                        style = {{ color: '#000000', fontWeight: '600' }}
                                     >
                                         clique aqui
                                     </Text>{' '}

@@ -24,10 +24,6 @@ export function Home({navigation, route}){
     const screenWidth = Dimensions.get('window').width;
     const [hasNotification, setHasNotification] = useState(true);
 
-    const email = route.params.email;
-    const password = route.params.password;
-    const rememberMe = route.params.rememberMe
-
     const backgroundImage = require('../../assets/homeImage.png');
 
     const MENU_OPTIONS = [
@@ -140,6 +136,7 @@ export function Home({navigation, route}){
                                     onPress = {() => {
                                         console.log('notify');
                                         setHasNotification(!hasNotification);
+                                        navigation.navigate('Warnings');
                                     }}
                                 >
                                     <Ionicons 
@@ -229,7 +226,7 @@ export function Home({navigation, route}){
                         </View>
                     </View>
                 </ScrollView>
-            <Footer/>
+            <Footer screen = { "Home" }/>
         </View>
     )
 }

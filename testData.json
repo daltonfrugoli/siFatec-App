@@ -79,5 +79,241 @@
                 }
             ]
         }
+    ],
+    "schedules": [
+        {
+            "id": 1,
+            "day": "Segunda",
+            "classes": [
+                {
+                    "id": 1,
+                    "subject": {
+                        "subjectName": "Banco de dados",
+                        "code": "IBD002"
+                    },
+                    "room": "Sala 12",
+                    "startAt": "18:45",
+                    "endAt": "19:45",
+                    "teacher": "João da Silva Junior"
+                },
+                {
+                    "id": 2,
+                    "subject": {
+                        "subjectName": "Banco de dados",
+                        "code": "IBD002"
+                    },
+                    "room": "Sala 12",
+                    "startAt": "19:35",
+                    "endAt": "20:25",
+                    "teacher": "João da Silva Junior"
+                },
+                {
+                    "id": 3,
+                    "subject": {
+                        "subjectName": "Laboratório de hardware",
+                        "code": "LDH002"
+                    },
+                    "room": "Sala 18",
+                    "startAt": "20:25",
+                    "endAt": "21:15",
+                    "teacher": "Maria Fernanda Oliveira"
+                },
+                {
+                    "id": 4,
+                    "subject": {
+                        "subjectName": "Laboratório de hardware",
+                        "code": "LDH002"
+                    },
+                    "room": "Sala 18",
+                    "startAt": "21:25",
+                    "endAt": "22:15",
+                    "teacher": "Maria Fernanda Oliveira"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "day": "Terça",
+            "classes": [
+                {
+                    "id": 1,
+                    "subject": {
+                        "subjectName": "Banco de dados",
+                        "code": "IBD002"
+                    },
+                    "room": "Sala 12",
+                    "startAt": "18:45",
+                    "endAt": "19:45",
+                    "teacher": "João da Silva Junior"
+                },
+                {
+                    "id": 2,
+                    "subject": {
+                        "subjectName": "Banco de dados",
+                        "code": "IBD002"
+                    },
+                    "room": "Sala 12",
+                    "startAt": "19:35",
+                    "endAt": "20:25",
+                    "teacher": "João da Silva Junior"
+                },
+                {
+                    "id": 3,
+                    "subject": {
+                        "subjectName": "Laboratório de hardware",
+                        "code": "LDH002"
+                    },
+                    "room": "Sala 18",
+                    "startAt": "20:25",
+                    "endAt": "21:15",
+                    "teacher": "Maria Fernanda Oliveira"
+                },
+                {
+                    "id": 4,
+                    "subject": {
+                        "subjectName": "Laboratório de hardware",
+                        "code": "LDH002"
+                    },
+                    "room": "Sala 18",
+                    "startAt": "21:25",
+                    "endAt": "22:15",
+                    "teacher": "Maria Fernanda Oliveira"
+                }
+            ]
+        }
+    ],
+    "history": [
+        {
+            "id": 1,
+            "year": "2025",
+            "period" : "1",
+            "subjects": [
+                {
+                    "id": 1,
+                    "subject": {
+                        "subjectName": "Programação WEB",
+                        "code": "PGW001"
+                    },
+                    "attendance": "85",
+                    "avarage": "7.0",
+                    "status": "Aprovado"
+                },
+                {
+                    "id": 2,
+                    "subject": {
+                        "subjectName": "Banco de dados",
+                        "code": "IBD002"
+                    },
+                    "attendance": "95",
+                    "avarage": "4.0",
+                    "status": "Reprovado por nota"
+                },
+                {
+                    "id": 3,
+                    "subject": {
+                        "subjectName": "Laboratório de hardware",
+                        "code": "LDH002"
+                    },
+                    "attendance": "90",
+                    "avarage": "9.0",
+                    "status": "Aprovado"
+                },
+                {
+                    "id": 4,
+                    "subject": {
+                        "subjectName": "Segurança da informação",
+                        "code": "SDI001"
+                    },
+                    "attendance": "80",
+                    "avarage": "10.0",
+                    "status": "Aprovado"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "year": "2025",
+            "period": "2",
+            "subjects": [
+                {
+                    "id": 1,
+                    "subject": {
+                        "subjectName": "Estrutura de dados",
+                        "code": "EDS001"
+                    },
+                    "attendance": "70",
+                    "avarage": "7.5",
+                    "status": "Reprovado por frquência"
+                },
+                {
+                    "id": 2,
+                    "subject": {
+                        "subjectName": "Lógica de programação",
+                        "code": "LDP001"
+                    },
+                    "attendance": "90",
+                    "avarage": "9.0",
+                    "status": "Aprovado"
+                },
+                {
+                    "id": 3,
+                    "subject": {
+                        "subjectName": "Administração",
+                        "code": "ADM001"
+                    },
+                    "attendance": "95",
+                    "avarage": "9.0",
+                    "status": "Aprovado"
+                },
+                {
+                    "id": 4,
+                    "subject": {
+                        "subjectName": "Programação linear",
+                        "code": "PGL001"
+                    },
+                    "attendance": "85",
+                    "avarage": "9.0",
+                    "status": "Aprovado"
+                }
+            ]
+        }
+    ],
+    "warnings": [
+        {
+            "id": 1,
+            "date": "02/06/25",
+            "messages": [
+                {
+                    "id": 1,
+                    "title": "Maratona de programação",
+                    "date": "02/06/25",
+                    "time": "18:30",
+                    "read": false,
+                    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "date": "12/05/25",
+            "messages": [
+                {
+                    "id": 1,
+                    "title": "Atualização de cadastro",
+                    "date": "12/05/25",
+                    "time": "15:00",
+                    "read": true,
+                    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                },
+                {
+                    "id": 2,
+                    "title": "Incrição TOEIC",
+                    "date": "12/05/25",
+                    "time": "12:00",
+                    "read": true,
+                    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                }
+            ]
+        }
     ]
 }

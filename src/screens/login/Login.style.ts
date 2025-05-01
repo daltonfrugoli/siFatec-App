@@ -12,6 +12,14 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 50
     },
+    cpsLogotipoContainer: {
+        flex: 1, 
+        borderColor: '#FFFFFF', 
+        borderRightWidth: 2, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: 40 
+    },
     cpsLogotipo: {
         height: 150,
         width: 150,
@@ -120,7 +128,6 @@ export const styles = StyleSheet.create({
     },
     solutionsModalContentContainer: {
         width: '95%',
-        //backgroundColor: '#F0F0F0'
     },
     modalTitleLabel: {
         color: '#000000',
@@ -128,4 +135,21 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         flex: 1
     },
+    modalInstructionContainer: { 
+        flexDirection :'row', 
+        alignItems: 'center', 
+        marginVertical: 8 
+    },
+    modalInstructionNumber: { 
+        color: '#6B6B6B', 
+        fontSize: 20, 
+        fontWeight: 'bold' 
+    },
+    modalInstructionBox: { 
+        marginLeft: 8, 
+        paddingHorizontal: 8, 
+        paddingVertical: 5, 
+        borderColor: '#000000', 
+        borderLeftWidth: 1 
+    }
 })

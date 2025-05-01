@@ -5,7 +5,12 @@ import { View, ToucableOpacity, TouchableOpacity } from 'react-native';
 // Plugins
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export const Footer = () => {
+// Navigation
+import { useNavigation } from "@react-navigation/native";
+
+export const Footer = ({ screen }) => {
+
+    const navigation = useNavigation();
 
     return(
         <View
@@ -21,11 +26,11 @@ export const Footer = () => {
         >
             <TouchableOpacity 
                 onPress = {() => {
-                    console.log('HomeFooter');
+                    navigation.navigate('Home');
                 }}
                 style = {{ paddingVertical: 10, paddingHorizontal: 50 }}
             >
-                <Ionicons style = {{ fontSize: 30, color: '#747474' }} name="home-outline"/>
+                <Ionicons style = {{ fontSize: 30, color: screen == "Home" ? '#B01C1C' : '#747474' }} name="home-outline"/>
             </TouchableOpacity>
             <View style = {{ height: '60%', backgroundColor: '#D8D8D8', width: 1 }}/>
             <TouchableOpacity

@@ -4,26 +4,26 @@ import { View, FlatList, Text, StatusBar } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Styles
-import { styles } from "./Schedule.style";
+import { styles } from "./Warnings.style";
 
 // Components
 import { Header } from "../../compenents/Header";
 import { Footer } from "../../compenents/Footer";
-import { ScheduleTile } from "../../compenents/ScheduleTile";
+import { WarningsTile } from "../../compenents/WarningsTile";
 
 // Test data
 import * as testData from "../../../testData.json";
 
-export function Schedule({ navigation, route }){
+export function Warnings({ navigation, route }){
 
-    const RenderScheduleTile = ({ item, index }) => {
+    const RenderWarningsTile = ({ item, index }) => {
 
         return(
-            <ScheduleTile item = { item } index = { index }/>
+            <WarningsTile item = { item } index = { index }/>
         )
     }
 
-    const DayContainer = ({ item, index }) => {
+    const WarningContainer = ({ item, index }) => {
 
         return(
             <View style = {{
@@ -39,10 +39,10 @@ export function Schedule({ navigation, route }){
                     color: '#680000',
                     marginBottom: 15,
                     marginLeft: 10
-                }}>{ item.day }</Text>
+                }}>{ item.date }</Text>
                 <FlatList
-                    data = { item.classes }
-                    renderItem = { RenderScheduleTile }
+                    data = { item.messages }
+                    renderItem = { RenderWarningsTile }
                     keyExtractor = { item => item.id }
                     numColumns = { 1 }
                 />
@@ -52,12 +52,12 @@ export function Schedule({ navigation, route }){
 
     return(
         <SafeAreaView style = {{ flex: 1, backgroundColor: '#FFFFFF' }}>
-            <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-            <Header label = { 'Agenda' }/>
+            <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+            <Header label = { 'Avisos' }/>
             <View style = {{ flex: 1 }}>
             <FlatList
-                data = { testData.schedules }
-                renderItem = { DayContainer }
+                data = { testData.warnings }
+                renderItem = { WarningContainer }
                 keyExtractor = { item => item.id }
                 numColumns = { 1 }
                 //scrollEnabled = { false }

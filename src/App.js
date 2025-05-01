@@ -25,6 +25,7 @@ import { Absences } from './screens/absences/Absences';
 import { Scores } from './screens/scores/Scores';
 import { History } from './screens/history/History';
 import { Schedule } from './screens/schedule/Schedule';
+import { Warnings } from './screens/warnings/Warnings';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ function App(){
         <Stack.Screen name='Scores' component={ Scores }/>
         <Stack.Screen name='History' component={ History }/>
         <Stack.Screen name='Schedule' component={ Schedule }/>
+        <Stack.Screen name='Warnings' component={ Warnings }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

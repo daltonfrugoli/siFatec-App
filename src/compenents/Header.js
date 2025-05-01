@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 // Plugins
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useNavigation, CommonActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 export const Header = (props) => {
 
