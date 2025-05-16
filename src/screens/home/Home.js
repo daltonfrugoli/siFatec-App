@@ -95,21 +95,23 @@ export function Home({navigation, route}){
                                 width: '85%',
                                 height: '100%',
                                 alignSelf:'center',
-                                paddingVertical: 30,
-                                justifyContent: 'space-between'
+                                paddingTop: 20,
+                                justifyContent: 'space-between',
+                                paddingBottom: 25
                             }}
                         >
                             <View
                                 style = {{
                                     width: '100%',
                                     flexDirection: 'row',
-                                    justifyContent: 'space-between'
+                                    justifyContent: 'space-between',
+                                    flex: 1
                                 }}
                             >
                                 <View
                                     style = {{
-                                        height: 100,
-                                        width: 100,
+                                        height: 80,
+                                        width: 80,
                                         borderRadius: 80,
                                         backgroundColor: '#D9D9D9',
                                         borderWidth: 3,
@@ -132,6 +134,7 @@ export function Home({navigation, route}){
                                         width: 50,
                                         height: 50,
                                         alignItems: 'center',
+                                        marginTop: 5
                                     }}
                                     onPress = {() => {
                                         console.log('notify');

@@ -55,13 +55,13 @@ export function Warnings({ navigation, route }){
             <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
             <Header label = { 'Avisos' }/>
             <View style = {{ flex: 1 }}>
-            <FlatList
-                data = { testData.warnings }
-                renderItem = { WarningContainer }
-                keyExtractor = { item => item.id }
-                numColumns = { 1 }
-                //scrollEnabled = { false }
-            />
+                <FlatList
+                    data = { testData.warnings }
+                    renderItem = { WarningContainer }
+                    keyExtractor = { item => item.id }
+                    numColumns = { 1 }
+                    //scrollEnabled = { false }
+                />
             </View>
             <Footer/>
         </SafeAreaView>
