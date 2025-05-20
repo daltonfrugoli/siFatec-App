@@ -23,6 +23,12 @@ import { CustomModal } from "../../compenents/CustomModal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SwitchToggle from "react-native-switch-toggle";
 
+// Https 
+import { login } from "../../services/Https";
+
+// Local storage
+import { db } from "../../App";
+
 export function Login({ navigation, route }){
 
     // Modal
@@ -46,9 +52,33 @@ export function Login({ navigation, route }){
     const cpsLogo = require('../../assets/cpsIcon.png');
 
     function submitCredentials(email, password, rememberMe){
-        console.log('Email: ', email);
-        console.log('Password: ', password);
-        navigation.navigate('Home', { email: email, password: password, rememberMe: rememberMe })
+
+        // API request
+        login(email, password)
+        .then((res) => {   
+            if (rememberMe){
+                db.transaction((tx) => {
+                    tx.executeSql(
+                        'INSERT INTO logged_user (token) VALUES (?);',
+                        [res.data.access_token],
+                        () => {
+                            navigation.replace('Home');
+                        },
+                        (tx, error) => {
+                            console.log('Erro ao inserir:', error);
+                        }
+                    );
+                });
+            } else {
+                navigation.replace('Home');
+            }
+            
+        })
+        .catch((error) => {
+            console.log(error.error)
+        })
+
+
     }
 
     const ModalInstructionTile = (props) => {

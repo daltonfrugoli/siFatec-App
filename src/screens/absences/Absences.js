@@ -13,7 +13,18 @@ import { Footer } from "../../compenents/Footer";
 // Test data
 import * as testData from "../../../testData.json";
 
+// Chart
+import PieChart from "react-native-pie-chart";
+
 export function Absences({ navigation, route }){
+
+    // Chart config 
+    const widthAndHeight = 48
+    const series = [
+        { value: 430, color: '#B70E0E' },
+        { value: 321, color: '#A09898' }
+    ]
+    const [absencesPercentage, setAbsencesPercentage] = useState('65');
 
     const AbsencesTile = ({ item, index }) => {
 
@@ -41,8 +52,15 @@ export function Absences({ navigation, route }){
                             <Text style = {{ color: '#545454', fontWeight: 600, fontSize: 16 }}>Presenças: <Text style = {{ fontWeight: 400 }}>{ item.presences }</Text></Text>
                         </View>
                     </View>
-                    <View style = {{ height: 48, width: 48, borderRadius: 48, borderColor: '#B70E0E', borderWidth: 4, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style = {{ color: '#000000', fontSize: 14 }}>99%</Text>
+                    <View
+                        style = {{
+                            position: 'relative',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ absencesPercentage }%</Text>
+                        <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
                     </View>
                 </View>
             </View>

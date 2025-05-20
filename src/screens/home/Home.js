@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     SafeAreaView,
@@ -18,20 +18,43 @@ import { Footer } from "../../compenents/Footer";
 // Plugins
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import PieChart from "react-native-pie-chart";
+
+// Https
+import { testAuthToken } from "../../services/Https";
 
 export function Home({navigation, route}){
 
     const screenWidth = Dimensions.get('window').width;
-    const [hasNotification, setHasNotification] = useState(true);
-
     const backgroundImage = require('../../assets/homeImage.png');
-
     const MENU_OPTIONS = [
         { label: 'Faltas', icon: 'calendar-outline', screen: 'Absences' },
         { label: 'Notas', icon: 'reader-outline', screen: 'Scores' },
         { label: 'Historico', icon: 'file-tray-full-outline', screen: 'History' },
         { label: 'Agenda', icon: 'time-outline', screen: 'Schedule' },
     ];
+
+    // Notification alert
+    const [hasNotification, setHasNotification] = useState(true);
+
+    // Chart config 
+    const widthAndHeight = 48
+    const series = [
+        { value: 430, color: '#B70E0E' },
+        { value: 321, color: '#A09898' }
+    ]
+    const [progress, setProgress] = useState('65');
+    const [income, setIncome] = useState('8.2');
+
+    useEffect(() => {
+        testAuthToken()
+        .then((res) => {        
+            console.log(res.data);
+        })
+        .catch((error) => {
+            console.log(error.error)
+        })
+    }, [])
 
     const ModuleButton = (props) => {
 
@@ -198,16 +221,30 @@ export function Home({navigation, route}){
                 <ScrollView contentContainerStyle = {{ alignItems: 'center' }}>
                     <View style = {{ paddingHorizontal: 5, backgroundColor: '#E4E4E4', height: 65, width: '85%', borderRadius: 20, marginVertical: 40, flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <View style = {{ flexDirection: 'row', alignItems: 'center', height: '100%', width: '45%' }}>
-                            <View style = {{ height: 48, width: 48, borderRadius: 48, borderColor: '#B70E0E', borderWidth: 4, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style = {{ color: '#000000', fontSize: 14 }}>99%</Text>
+                            <View
+                                style = {{
+                                    position: 'relative',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ progress }%</Text>
+                                <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
                             </View>
                             <Text style = {{ marginLeft: 10, flex: 1, flexWrap: 'wrap', color: '#545454' }}>
                                 Percentual de progressão
                             </Text>
                         </View>
                         <View style = {{ flexDirection: 'row', alignItems: 'center', height: '100%', width: '45%' }}>
-                            <View style = {{ height: 48, width: 48, borderRadius: 48, borderColor: '#B70E0E', borderWidth: 4, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style = {{ color: '#000000', fontSize: 14 }}>99%</Text>
+                            <View
+                                style = {{
+                                    position: 'relative',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ income }</Text>
+                                <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
                             </View>
                             <Text style = {{ marginLeft: 10, flex: 1, flexWrap: 'wrap', color: '#545454' }}>
                                 Percentual de progressão
