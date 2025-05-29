@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { View, FlatList, Text, StatusBar } from "react-native";
+import { View, FlatList, Text, StatusBar, ActivityIndicator } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Styles
@@ -9,6 +9,7 @@ import { styles } from "./Absences.style";
 // Components
 import { Header } from "../../compenents/Header";
 import { Footer } from "../../compenents/Footer";
+import { AbsencesTile } from "../../compenents/AbsencesTile";
 
 // Test data
 import * as testData from "../../../testData.json";
@@ -16,68 +17,53 @@ import * as testData from "../../../testData.json";
 // Chart
 import PieChart from "react-native-pie-chart";
 
+// Https
+import { getAbsences } from "../../services/Https";
+
 export function Absences({ navigation, route }){
 
-    // Chart config 
-    const widthAndHeight = 48
-    const series = [
-        { value: 430, color: '#B70E0E' },
-        { value: 321, color: '#A09898' }
-    ]
-    const [absencesPercentage, setAbsencesPercentage] = useState('65');
+    // Spinner 
+    const [spinnerState, setSpinnerState] = useState(true);
 
-    const AbsencesTile = ({ item, index }) => {
+    const [studentAbsences, setStudentAbsences] = useState([]);
 
-        return(
-            <View
-                style = {{
-                    borderBottomWidth: 1,
-                    borderColor: '#D8D8D8',
-                    width: '100%',
-                    alignItems: 'center'
-                }}
-            >
-                <View
-                    style = {{
-                        flexDirection: 'row',
-                        padding: 20,
+    useEffect(() => {
+        getAbsences()
+        .then((res) => {        
+            console.log(res.data);
+            setTimeout(() => {
+                setStudentAbsences(res.data);
+                setSpinnerState(false);
+            }, 500)
+        })
+        .catch((error) => {
+            console.log(error.error)
+        })
+    }, [])  
 
-                    }}
-                >
-                    <View style = {{ height: 10, width: 10, borderRadius: 10, backgroundColor: '#ADADAD', marginTop: 10, marginRight: 15 }}/>
-                    <View style = {{ flex: 1 }}>
-                        <Text style = {{ color: '#000000', fontSize: 20, fontWeight: 500 }}>{ item.subjectName }</Text>
-                        <View style = {{ flexDirection: 'row' }}>
-                            <Text style = {{ color: '#A83535', fontWeight: 600, fontSize: 16, marginRight: 20 }}>Faltas: <Text style = {{ color: '#545454', fontWeight: 400 }}>{ item.absences }</Text></Text>
-                            <Text style = {{ color: '#545454', fontWeight: 600, fontSize: 16 }}>Presenças: <Text style = {{ fontWeight: 400 }}>{ item.presences }</Text></Text>
-                        </View>
-                    </View>
-                    <View
-                        style = {{
-                            position: 'relative',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ absencesPercentage }%</Text>
-                        <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
-                    </View>
-                </View>
-            </View>
-        )
-    }
+    const AbsencesTileComponent = ({item, index}) => <AbsencesTile item = { item } index = { index }/>
 
     return(
         <SafeAreaView style = {{ flex: 1, backgroundColor: '#FFFFFF' }}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
             <Header label = { 'Faltas' }/>
             <FlatList
-                data = { testData.absences }
-                renderItem = { AbsencesTile }
-                keyExtractor = { item => item.id }
+                data = { studentAbsences }
+                renderItem = { AbsencesTileComponent }
+                keyExtractor = { (_, index) => index.toString() }
                 numColumns = { 1 }
             />
             <Footer/>
+            { spinnerState == true ? 
+                <>
+                    <View style = {[ styles.spinner, { backgroundColor: "#000000", opacity: 0.3 } ]}>
+                    </View>
+                    <View style = {[ styles.spinner, ]}>
+                        <ActivityIndicator size="large" color={ '#B70E0E' } />
+                        <Text style = {{ color: '#FFFFFF', fontStyle: 'italic', marginTop: 3, fontWeight:'bold' }}>Carregando...</Text>
+                    </View>
+                </>
+            : null } 
         </SafeAreaView>
     )
 }

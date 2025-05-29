@@ -42,14 +42,12 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
     },
     textInputLabel: {
-        color: '#747474',
+        color: '#000000',
         fontSize: 15
     },
     textInput: { 
         backgroundColor: '#FFFFFF',
-        borderColor: "#A49C9C",
         borderBottomWidth: 1,
-        marginBottom: 20,
         height: 35,
         paddingHorizontal: 0,
         color: '#000000'
@@ -66,7 +64,7 @@ export const styles = StyleSheet.create({
     hidePassButtonContainer: {
         position: 'absolute',
         right: 20,
-        bottom: 30
+        top: 25
     },
     hidePassButton: { 
         fontSize: 20,
@@ -151,5 +149,14 @@ export const styles = StyleSheet.create({
         paddingVertical: 5, 
         borderColor: '#000000', 
         borderLeftWidth: 1 
+    },
+    spinner: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { View, FlatList, Text, StatusBar } from "react-native";
+import { View, FlatList, Text, StatusBar, ActivityIndicator } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Styles
@@ -14,7 +14,29 @@ import { HistoryTile } from "../../compenents/HistoryTile";
 // Test data
 import * as testData from "../../../testData.json";
 
+// Https
+import { getHistory } from "../../services/Https";
+
 export function History({ navigation, route }){
+
+    // Spinner 
+    const [spinnerState, setSpinnerState] = useState(true);
+
+    const [studentHistory, setStudentHistory] = useState([]);
+
+    useEffect(() => {
+        getHistory()
+        .then((res) => {        
+            console.log(res.data[0].subjects);
+            setTimeout(() => {
+                setStudentHistory(res.data);
+                setSpinnerState(false);
+            }, 500)
+        })
+        .catch((error) => {
+            console.log(error.error)
+        })
+    }, [])
 
     const RenderHistoryTile = ({ item, index }) => {
 
@@ -51,7 +73,7 @@ export function History({ navigation, route }){
                 <FlatList
                     data = { item.subjects }
                     renderItem = { RenderHistoryTile }
-                    keyExtractor = { item => item.id }
+                    keyExtractor = { (_, index) => index.toString() }
                     numColumns = { 1 }
                 />
             </View>
@@ -64,14 +86,24 @@ export function History({ navigation, route }){
             <Header label = { 'Histórico' }/>
             <View style = {{ flex: 1 }}>
             <FlatList
-                data = { testData.history }
+                data = { studentHistory }
                 renderItem = { PeriodContainer }
-                keyExtractor = { item => item.id }
+                keyExtractor = { (_, index) => index.toString() }
                 numColumns = { 1 }
                 //scrollEnabled = { false }
             />
             </View>
             <Footer/>
+            { spinnerState == true ? 
+                <>
+                    <View style = {[ styles.spinner, { backgroundColor: "#000000", opacity: 0.3 } ]}>
+                    </View>
+                    <View style = {[ styles.spinner, ]}>
+                        <ActivityIndicator size="large" color={ '#B70E0E' } />
+                        <Text style = {{ color: '#FFFFFF', fontStyle: 'italic', marginTop: 3, fontWeight:'bold' }}>Carregando...</Text>
+                    </View>
+                </>
+            : null } 
         </SafeAreaView>
     )
 }

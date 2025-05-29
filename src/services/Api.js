@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 
 const api = create({
-    baseURL: 'http://192.168.1.19:8000'
+    baseURL: 'http://192.168.0.158:8000'
 })
 
 api.addResponseTransform(response => {

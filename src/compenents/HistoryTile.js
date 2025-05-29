@@ -43,8 +43,8 @@ export const HistoryTile = ({ item, index }) => {
             <Animated.View style={[styles.container, { height: heightInterpolate }]}>
             <View style={styles.topRow}>
                 <View style = {{ flexDirection: 'row', flex: 1 }}>
-                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.subject.subjectName }</Text>
-                    <Text numberOfLines={1} style={styles.code}>    •    { item.subject.code }</Text>
+                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.subject_name }</Text>
+                    <Text numberOfLines={1} style={styles.code}>    •    { item.acronym }</Text>
                 </View>
                 
                 <Animated.View style={{ transform: [{ rotate: rotateIcon }] }}>
@@ -56,9 +56,9 @@ export const HistoryTile = ({ item, index }) => {
                 <View style={styles.extraInfo}>
                     <View style={styles.detailsRow}>
                         <Text style={{ color: '#000000', fontSize: 15 }}><Text style={{ fontWeight: 'bold'}}>Frequência:</Text>  { item.attendance }%</Text>
-                        <Text style={{ color: '#000000', fontSize: 15, marginLeft: 30 }}><Text style={{ fontWeight: 'bold'}}>Média:</Text>  { item.avarage }</Text>
+                        <Text style={{ color: '#000000', fontSize: 15, marginLeft: 30 }}><Text style={{ fontWeight: 'bold'}}>Média:</Text>  { item.avarage_score }</Text>
                     </View>
-                    <Text style={{ color: '#000000', fontSize: 15}}><Text style={{ fontWeight: 'bold'}}>Status na disciplina:</Text>  { item.status }</Text>
+                    <Text style={{ color: '#000000', fontSize: 15}}><Text style={{ fontWeight: 'bold'}}>Status na disciplina:</Text>  Aprovado</Text>
                 </View>
             )}
             </Animated.View>

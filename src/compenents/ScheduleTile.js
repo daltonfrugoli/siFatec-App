@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import moment from 'moment';
 
 export const ScheduleTile = ({ item, index }) => {
 
@@ -43,8 +44,8 @@ export const ScheduleTile = ({ item, index }) => {
             <Animated.View style={[styles.container, { height: heightInterpolate }]}>
             <View style={styles.topRow}>
                 <View style = {{ flexDirection: 'row', flex: 1 }}>
-                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.subject.subjectName }</Text>
-                    <Text numberOfLines={1} style={styles.code}>    •    { item.subject.code }</Text>
+                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.subject_name }</Text>
+                    <Text numberOfLines={1} style={styles.code}>    •    { item.acronym }</Text>
                 </View>
                 
                 <Animated.View style={{ transform: [{ rotate: rotateIcon }] }}>
@@ -61,15 +62,15 @@ export const ScheduleTile = ({ item, index }) => {
                         </Text>
                         <View style = {{ flexDirection: 'row', alignItems: 'center' }}>
                             <Ionicons style = {{ color: '#ADADAD', fontSize: 20 }} name="location-outline"/>
-                            <Text style={styles.room}>{ item.room }</Text>
+                            <Text style={styles.room}>{ item.local }</Text>
                         </View>
                     </View>
                     
 
                     <View style={styles.timetableRow}>
                         <Ionicons style = {{ color: '#ADADAD', fontSize: 25 }} name="time-outline"/>
-                        <Text style={styles.timeBox}>{ item.startAt }</Text>
-                        <Text style={styles.timeBox}>{ item.endAt }</Text>
+                        <Text style={styles.timeBox}>{ moment(item.start_time, "HH:mm:ss").format('HH:mm') }</Text>
+                        <Text style={styles.timeBox}>{ moment(item.end_time, "HH:mm:ss").format('HH:mm') }</Text>
                     </View>
                 </View>
             )}

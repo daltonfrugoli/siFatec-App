@@ -1,6 +1,7 @@
 import api from './Api' // supondo que você salvou o create() em api.js
 
 export async function login(email, password) {
+  console.log('chamando aqui')
   const formBody = new URLSearchParams({
     username: email,
     password: password,
@@ -22,7 +23,7 @@ export async function login(email, password) {
     return response
 
   } catch (error) {
-    return { error: true, message: error.data?.detail || 'Erro ao fazer login' }
+    return error
   }
 }
 
@@ -34,12 +35,47 @@ export function setHeaderAuth(token) {
     }
 }
 
-export async function testAuthToken () {
-    // Buscar escolas de uma cidade
+export async function getProfile () {
     try {
-        const response = await api.get('/users/me');    
+        const response = await api.get('/profile');    
         return response;
     } catch (err) {
         return err;
     }
+}
+
+export async function getAbsences () {
+  try {
+      const response = await api.get('/students/absences');    
+      return response;
+  } catch (err) {
+      return err;
+  }
+}
+
+export async function getScores () {
+  try {
+      const response = await api.get('/students/scores');    
+      return response;
+  } catch (err) {
+      return err;
+  }
+}
+
+export async function getHistory () {
+  try {
+      const response = await api.get('/students/history');    
+      return response;
+  } catch (err) {
+      return err;
+  }
+}
+
+export async function getSchedule () {
+  try {
+      const response = await api.get('/students/schedule');    
+      return response;
+  } catch (err) {
+      return err;
+  }
 }

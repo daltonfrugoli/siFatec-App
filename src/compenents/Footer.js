@@ -2,6 +2,9 @@ import React from "react";
 
 import { View, ToucableOpacity, TouchableOpacity } from 'react-native';
 
+// Local storage
+import { db } from "../App";
+
 // Plugins
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -36,6 +39,24 @@ export const Footer = ({ screen }) => {
             <TouchableOpacity
                 onPress = {() => {
                     console.log('LogoutFooter');
+                        navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'Login' }],
+                    });
+
+                    db.transaction((tx) => {
+                        tx.executeSql(
+                            'DELETE FROM logged_user;',
+                            [],
+                            () => {
+                                console.log('Registro(s) removido(s) com sucesso.');
+                            },
+                            (tx, error) => {
+                                console.log('Erro ao deletar registro:', error);
+                            }
+                        );
+                    });
+                      
                 }}
                 style = {{ paddingVertical: 10, paddingHorizontal: 50 }}
             >

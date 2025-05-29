@@ -21,10 +21,13 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import PieChart from "react-native-pie-chart";
 
 // Https
-import { testAuthToken } from "../../services/Https";
+import { getProfile } from "../../services/Https";
 
 export function Home({navigation, route}){
 
+    const [studentName, setStudentName] = useState('');
+    const [studentRa, setStudentRa] = useState('');
+    const [studentPeriod, setStudentPeriod] = useState();
     const screenWidth = Dimensions.get('window').width;
     const backgroundImage = require('../../assets/homeImage.png');
     const MENU_OPTIONS = [
@@ -47,9 +50,12 @@ export function Home({navigation, route}){
     const [income, setIncome] = useState('8.2');
 
     useEffect(() => {
-        testAuthToken()
+        getProfile()
         .then((res) => {        
             console.log(res.data);
+            setStudentName(res.data.name);
+            setStudentRa(res.data.registration_number);
+            setStudentPeriod(res.data.student_period);
         })
         .catch((error) => {
             console.log(error.error)
@@ -133,9 +139,9 @@ export function Home({navigation, route}){
                             >
                                 <View
                                     style = {{
-                                        height: 80,
-                                        width: 80,
-                                        borderRadius: 80,
+                                        height: 100,
+                                        width: 100,
+                                        borderRadius: 100,
                                         backgroundColor: '#D9D9D9',
                                         borderWidth: 3,
                                         borderColor: "#FFFFFF",
@@ -189,7 +195,9 @@ export function Home({navigation, route}){
                                     />
                                 </TouchableOpacity>
                             </View>
-                            <View>
+                            <View
+                                style = {{ marginBottom: 20 }}
+                            >
                                 <Text style = {{ color: '#FFFFFF' }}>Bem-vindo(a) de volta!</Text>
                                 <Text
                                     style = {{
@@ -197,7 +205,7 @@ export function Home({navigation, route}){
                                         fontWeight: 'bold',
                                         color: '#FFFFFF'
                                     }}
-                                >Dalton Frugoli</Text>
+                                >{ studentName }</Text>
                             </View>
                             <View style = {{ flexDirection: 'row' }}>
                                 <Text
@@ -205,14 +213,14 @@ export function Home({navigation, route}){
                                         fontSize: 15,
                                         color: '#FFFFFF'
                                     }}
-                                ><Text style = {{ fontWeight: 'bold' }}>RA:</Text> 4886297356248</Text>
+                                ><Text style = {{ fontWeight: 'bold' }}>RA:</Text> { studentRa }</Text>
                                 <Text
                                     style = {{
                                         fontSize: 15,
                                         marginLeft: 30,
                                         color: '#FFFFFF'
                                     }}
-                                ><Text style = {{ fontWeight: 'bold' }}>Ciclo:</Text> 4</Text>
+                                ><Text style = {{ fontWeight: 'bold' }}>Ciclo:</Text> { studentPeriod }</Text>
                             </View>
                         </View>
                     </SafeAreaView>

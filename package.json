@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
     "apisauce": "^3.1.1",
+    "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-modal": "^14.0.0-rc.1",
@@ -23,6 +24,7 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-svg": "^15.12.0",
     "react-native-switch-toggle": "^2.2.1",
+    "react-native-toast-message": "^2.3.0",
     "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {

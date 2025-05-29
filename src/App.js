@@ -16,6 +16,8 @@ import {
   View,
 } from 'react-native';
 
+import Toast from 'react-native-toast-message';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -47,18 +49,21 @@ export const db = SQLite.openDatabase(
 function App(){
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='SplashScreen' screenOptions={{ headerShown: false, headerLeft: null, animation: "slide_from_right" }}>
-        <Stack.Screen name='SplashScreen' component={ SplashScreen }/>
-        <Stack.Screen name='Login' component={ Login }/>
-        <Stack.Screen name='Home' component={ Home }/>
-        <Stack.Screen name='Absences' component={ Absences }/>
-        <Stack.Screen name='Scores' component={ Scores }/>
-        <Stack.Screen name='History' component={ History }/>
-        <Stack.Screen name='Schedule' component={ Schedule }/>
-        <Stack.Screen name='Warnings' component={ Warnings }/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='SplashScreen' screenOptions={{ headerShown: false, headerLeft: null, animation: "slide_from_right" }}>
+          <Stack.Screen name='SplashScreen' component={ SplashScreen }/>
+          <Stack.Screen name='Login' component={ Login }/>
+          <Stack.Screen name='Home' component={ Home }/>
+          <Stack.Screen name='Absences' component={ Absences }/>
+          <Stack.Screen name='Scores' component={ Scores }/>
+          <Stack.Screen name='History' component={ History }/>
+          <Stack.Screen name='Schedule' component={ Schedule }/>
+          <Stack.Screen name='Warnings' component={ Warnings }/>
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast/>
+    </>
   );
 }
 
