@@ -42,12 +42,17 @@ export function Home({navigation, route}){
 
     // Chart config 
     const widthAndHeight = 48
-    const series = [
-        { value: 430, color: '#B70E0E' },
-        { value: 321, color: '#A09898' }
+    const [studentProgess, setStudentProgress] = useState(0);
+    const [studentIncome, setStudentIncome] = useState(0);
+    const progressSeries = [
+        { value: studentProgess, color: '#B70E0E' },
+        { value: 100 - studentProgess, color: '#A09898' }
     ]
-    const [progress, setProgress] = useState('65');
-    const [income, setIncome] = useState('8.2');
+    const incomeSeries = [
+        { value: studentIncome, color: '#B70E0E' },
+        { value: 10 - studentIncome, color: '#A09898' }
+    ]
+
 
     useEffect(() => {
         getProfile()
@@ -56,6 +61,8 @@ export function Home({navigation, route}){
             setStudentName(res.data.name);
             setStudentRa(res.data.registration_number);
             setStudentPeriod(res.data.student_period);
+            setStudentIncome(res.data.average_grade);
+            setStudentProgress(res.data.progress_percentage);
         })
         .catch((error) => {
             console.log(error.error)
@@ -236,8 +243,8 @@ export function Home({navigation, route}){
                                     justifyContent: 'center'
                                 }}
                             >
-                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ progress }%</Text>
-                                <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
+                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ studentProgess.toFixed() }%</Text>
+                                <PieChart widthAndHeight={widthAndHeight} series={progressSeries} cover={0.80} />
                             </View>
                             <Text style = {{ marginLeft: 10, flex: 1, flexWrap: 'wrap', color: '#545454' }}>
                                 Percentual de progressão
@@ -251,11 +258,11 @@ export function Home({navigation, route}){
                                     justifyContent: 'center'
                                 }}
                             >
-                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ income }</Text>
-                                <PieChart widthAndHeight={widthAndHeight} series={series} cover={0.80} />
+                                <Text style = {{ position: 'absolute', fontSize: 13, color: '#000000' }}>{ studentIncome }</Text>
+                                <PieChart widthAndHeight={widthAndHeight} series={incomeSeries} cover={0.80} />
                             </View>
                             <Text style = {{ marginLeft: 10, flex: 1, flexWrap: 'wrap', color: '#545454' }}>
-                                Percentual de progressão
+                                Média de rendimento
                             </Text>
                         </View>
                     </View>

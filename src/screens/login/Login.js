@@ -60,6 +60,7 @@ export function Login({ navigation, route }){
     const cpsLogo = require('../../assets/cpsIcon.png');
 
     function submitCredentials(email, password, rememberMe){
+        setSpinnerState(true);
         // API request
         login(email, password)
         .then((res) => { 
@@ -82,6 +83,7 @@ export function Login({ navigation, route }){
                             },
                             (tx, error) => {
                                 console.log('Erro ao inserir:', error);
+                                setSpinnerState(false);
                                 Alert.alert('Atenção', 'Houve um erro inesperado. Por favor, tente novamente. Se o erro persistir, reinicie o aplicativo.' + error)
                             }
                         );
@@ -99,6 +101,7 @@ export function Login({ navigation, route }){
         })
         .catch((error) => {
             console.log('Error: ', error);
+            setSpinnerState(false);
             Alert.alert('Atenção', 'Houve um erro inesperado. Por favor, tente novamente. Se o erro persistir, reinicie o aplicativo.' + error)
         })
 
