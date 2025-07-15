@@ -12,11 +12,12 @@ import {
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { CustomModal } from './CustomModal';
+import moment from 'moment';
 
 export const WarningsTile = ({ item, index }) => {
 
     const [modalIsVisible, setModalIsVisible] = useState(false);
-    const read = item.read
+    //const read = item.read
     const [expanded, setExpanded] = useState(false);
     const animation = useRef(new Animated.Value(0)).current;
     //const title = item.subject.subjectName;
@@ -54,12 +55,12 @@ export const WarningsTile = ({ item, index }) => {
                             height: 8,
                             width: 8,
                             borderRadius: 8,
-                            backgroundColor: read ? '#787878' : '#680000',
+                            backgroundColor: '#680000',//read ? '#787878' : '#680000',
                             marginRight: 15 
                         }}
                     />
-                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.title }</Text>
-                    <Text style = {{ color: '#545454', marginLeft: 15 }}>{ item.time }</Text>
+                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{ item.titulo }</Text>
+                    <Text style = {{ color: '#545454', marginLeft: 15 }}>{ moment(item.created_at).format("HH:mm") }</Text>
                 </View>
             </View>
             {/* <WarningModal/> */}
@@ -86,8 +87,8 @@ export const WarningsTile = ({ item, index }) => {
                             paddingRight: 15
                         }}
                     >
-                        <Text style = {{ color: '#000000', fontSize: 20, fontWeight: 'bold' }}>{ item.title }</Text>
-                        <Text style = {{ color: '#ADADAD', marginTop: 0 }}>{ item.date } - { item.time }</Text>
+                        <Text style = {{ color: '#000000', fontSize: 20, fontWeight: 'bold' }}>{ item.titulo }</Text>
+                        <Text style = {{ color: '#ADADAD', marginTop: 0 }}>{ moment(item.created_at).format("DD/MM/YYYY") } - { moment(item.created_at).format("HH:mm") }</Text>
                     </View>
                     <ScrollView 
                         showsVerticalScrollIndicator
@@ -101,7 +102,7 @@ export const WarningsTile = ({ item, index }) => {
                             marginVertical: 25
                         }}
                     >
-                        <Text style = {{ color: '#000000', marginVertical: 15 }}>{ item.message }</Text>
+                        <Text style = {{ color: '#000000', marginVertical: 15 }}>{ item.mensagem }</Text>
                     </ScrollView>
                 </View>
             </CustomModal>
