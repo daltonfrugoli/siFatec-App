@@ -79,3 +79,12 @@ export async function getSchedule () {
       return err;
   }
 }
+
+export async function getMessages () {
+  try {
+      const response = await api.get('/students/messages');    
+      return response;
+  } catch (err) {
+      return err;
+  }
+}
