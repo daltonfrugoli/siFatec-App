@@ -1,7 +1,3 @@
-Boa! 👌 Se o back-end é a API em **FastAPI**, o front-end mobile em **React Native** pode ter um README complementar, destacando que ele consome essa API e serve como interface para o usuário.
-
-Aqui está um modelo de README que você pode adaptar:
-
 ---
 
 # 📱 App de Gestão Acadêmica
