@@ -21,7 +21,7 @@ Aplicativo mobile desenvolvido em **React Native**, projetado para auxiliar na *
 * **React Native**
 * **JavaScript / TypeScript**
 * **API sauce**
-* **React Navigation** (navegação entre telas)
+* **React Navigation** 
 * **SQLite**
 
 ---
@@ -33,7 +33,7 @@ Este app se conecta à API desenvolvida em Python com FastAPI:
 
 ---
 
-### 📸 Screenshots (opcional)
+### 📸 Screenshots
 
 <p align="center">
   <img src="./assets/readmeImages/loginPrint.png" alt="Tela de Login" width="250"/>
