@@ -35,7 +35,11 @@ Este app se conecta à API desenvolvida em Python com FastAPI:
 
 ### 📸 Screenshots (opcional)
 
-![Tela de login](./assets/readmeImages/loginPrint.png)
+<p align="center">
+  <img src="./assets/loginPrint.png.png" alt="Tela de Login" width="250"/>
+  <img src="./assets/homePrint.png.png" alt="Tela Dashboard" width="250"/>
+  <img src="./assets/scoresPrint.png.png" alt="Tela Notas" width="250"/>
+</p>
 
 ---
 
